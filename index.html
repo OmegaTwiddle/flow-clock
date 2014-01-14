@@ -74,8 +74,10 @@
       var arc = d3.svg.arc()
           .startAngle(function(d) { return d.x; })
           .endAngle(function(d) { return d.x + d.dx - .01 / (d.depth + .5); })
-          .innerRadius(function(d) { return radius / 3 * d.depth; })
-          .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
+          .innerRadius(function(d) { return 40; })
+          .outerRadius(function(d) { return 300; });
+
+          console.log(arc);
 
       d3.json("test_data.json", function(error, root) {
 
@@ -86,6 +88,7 @@
             .value(function(d) { return d.size; })
             .nodes(root)
             .forEach(function(d) {
+              console.log(d);
               d._children = d.children;
               d.sum = d.value;
               d.key = key(d);
@@ -184,7 +187,7 @@
         var p = d;
         while (p.depth > 1) p = p.parent;
         var c = d3.lab(hue(p.name));
-        c.l = luminance(d.sum);
+        c.l = luminance(d.sum + 200);
         return c;
       }
 
