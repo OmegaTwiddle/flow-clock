@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    
+
     //initialize some php stuff
     $.ajax({
         type: 'GET',
-        url: '../scripts/initialize.php',
+        url: 'scripts/initialize.php',
         success: function(msg){
             $(document.body).prepend(msg);
         } 
@@ -54,7 +54,7 @@ $(document).ready(function() {
         if (($("#loginFirstInputField").val() != "") && ($("#loginModal #password").val() != "")){
             $.ajax({
                 type: 'POST',
-                url: '../scripts/loginRequest.php',
+                url: 'scripts/loginRequest.php',
                 data: { username : $("#loginFirstInputField").val(), password : $("#loginModal #password").val() },
                 success: function(msg){
                     if (msg.status == "success"){
@@ -86,7 +86,7 @@ $(document).ready(function() {
                     if ($("#registerModal #email").val().search(emailRegExp) != -1){
                         $.ajax({
                             type: 'POST',
-                            url: 'http://jinseigo.com/scripts/registerRequest.php',
+                            url: 'scripts/registerRequest.php',
                             data: { username : $("#registerFirstInputField").val(), password : $("#registerModal #password").val(),
                                 verifyPassword : $("#registerModal #verifyPassword").val(), email : $("#registerModal #email").val() },
                             success: function(msg){
@@ -124,7 +124,7 @@ $(document).ready(function() {
     $(document.body).on("click", "#logoutButton", function(){
         $.ajax({
             type: 'POST',
-            url: '../scripts/logout.php',
+            url: 'scripts/logout.php',
             data: { user : $(".hiddenUserID").attr("id") },
             success: function (msg) {
                 console.log("Successful log out.");
