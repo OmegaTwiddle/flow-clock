@@ -2,10 +2,10 @@
 
 	session_start();
 
-	$fileContent = file_get_contents('dbInfo.txt');
+	list($user, $pass, $extra) = explode(",", file_get_contents('dbInfo.txt'));
 
 	//check if username exists
-	$dbconnection = mysql_connect("localhost", $fileContent[0], $fileContent[1]);
+	$dbconnection = mysql_connect("localhost", $user, $pass);
 		
 	mysql_select_db("mgsgo", $dbconnection);
 	
@@ -14,7 +14,7 @@
 	if ($_SESSION['username']){
 		echo json_encode($_SESSION['username'] . " is logged in!");
 	} else {
-		echo json_encode($fileContent . " " . $fileContent[0]);
+		echo json_encode($user . " " . $pass);
 	}
 
 ?>
