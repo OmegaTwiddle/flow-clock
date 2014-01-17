@@ -33,7 +33,7 @@
 	mysql_query($sql);
 
 
-	$sql = "INSERT INTO clock_tasks 
+	$sql = "INSERT INTO clock_task 
 			(name, clock_id, seconds) 
 			VALUES 
 			('" . $_GET["task1Name"] . "', " . $clockID . ", " . $_GET["task1Length"] . ")";
