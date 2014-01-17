@@ -10,11 +10,10 @@
 		//assume username doesnt exist
 		$usernameExists = false;
 
-		$file = 'dbInfo.txt';
-		$fileContent = file($file);
+		list($user, $pass, $extra) = explode(",", file_get_contents('dbInfo.txt'));
 
 		//check if username exists
-		$dbconnection = mysql_connect("localhost", $fileContent[0], $fileContent[1]);
+		$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
 		mysql_select_db("mgsgo", $dbconnection);
 
 		$checkUsername = "SELECT user_name from users";
