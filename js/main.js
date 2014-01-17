@@ -143,6 +143,7 @@ $(document).ready(function() {
                 url: 'scripts/createClock.php',
                 data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() },
                 success: function(msg){
+                    console.log(msg);
                     if (msg == "success"){
                         alert("Successful creation!");
                     } 
