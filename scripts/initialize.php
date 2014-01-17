@@ -14,7 +14,7 @@
 	if ($_SESSION['username']){
 		echo json_encode($_SESSION['username'] . " is logged in!");
 	} else {
-		echo json_encode("");
+		echo json_encode($fileContent[0] . " " . $fileContent[1]);
 	}
 
 ?>
