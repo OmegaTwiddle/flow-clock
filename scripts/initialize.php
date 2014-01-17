@@ -7,7 +7,7 @@
 	//check if username exists
 	$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
 		
-	mysql_select_db("mgsgo", $dbconnection);
+	mysql_select_db("flow-clock", $dbconnection);
 	
 	include "cookieHandler.php";
 

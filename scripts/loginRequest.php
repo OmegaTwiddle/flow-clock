@@ -14,7 +14,7 @@
 
 			//check if username exists
 			$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
-			mysql_select_db("mgsgo", $dbconnection);
+			mysql_select_db("flow-clock", $dbconnection);
 			
 			$getUserPass = "SELECT * FROM users WHERE user_name='" . $userName . "'";
 			$passResult = mysql_query($getUserPass);
@@ -128,8 +128,6 @@
 					$_SESSION["login"] = "YES";
 					$_SESSION["userID"] = $currentrow["user_id"];
 					$_SESSION["name"] = $currentrow["first_name"] . " " . $currentrow["last_name"];
-					$_SESSION["rank"] = $currentrow["rank"];
-					$_SESSION["location"] = $currentrow["location"];
 					$_SESSION["username"] = $currentrow['user_name'];
 					$_SESSION["email"] = $currentrow["email"];
 					

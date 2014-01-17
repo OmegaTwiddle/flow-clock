@@ -14,7 +14,7 @@
 
 		//check if username exists
 		$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
-		mysql_select_db("mgsgo", $dbconnection);
+		mysql_select_db("flow-clock", $dbconnection);
 
 		$checkUsername = "SELECT user_name from users";
 
@@ -152,9 +152,9 @@
 			}
 
 			$sql = "INSERT INTO users
-			(first_name, last_name, user_name, password, salt, auth_token, email, age, rank, location, wins, losses, ties, rank_graph, profile_picture)
+			(first_name, last_name, user_name, password, salt, auth_token, email)
 			VALUES
-			(' ', ' ', '" . $userName . "', '" . $hashAndSaltArray[0] . "', '" . $hashAndSaltArray[1] . "', '" . $random_string . "', '" . $userEmail . "', ' ', ' ', ' ', 0, 0, 0, '" . $userName . "_rank.tsv', 'default_profile_pic.png')";
+			(' ', ' ', '" . $userName . "', '" . $hashAndSaltArray[0] . "', '" . $hashAndSaltArray[1] . "', '" . $random_string . "', '" . $userEmail . "')";
 
 			mysql_query($sql);
 
@@ -168,8 +168,6 @@
 					$_SESSION["login"] = "YES";
 					$_SESSION["userID"] = $currentrow["user_id"];
 					$_SESSION["name"] = $currentrow["first_name"] . " " . $currentrow["last_name"];
-					$_SESSION["rank"] = $currentrow["rank"];
-					$_SESSION["location"] = $currentrow["location"];
 					$_SESSION["username"] = $userName;
 					$_SESSION["email"] = $currentrow["email"];
 					$_SESSION["newUser"] = "YES";
