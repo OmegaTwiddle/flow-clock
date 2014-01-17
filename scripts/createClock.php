@@ -28,10 +28,17 @@
 	$sql = "INSERT INTO user_clocks 
 			(user_id, clock_id, is_owner) 
 			VALUES
-			(" . $_GET["userID"] ", " . $clockID . ", 1)";
+			(" . $_GET["userID"] . ", " . $clockID . ", 1)";
 
 	mysql_query($sql);
 
+
+	$sql = "INSERT INTO clock_task 
+			(name, clock_id, seconds) 
+			VALUES 
+			('" . $_GET["task1Name"] . "', " . $clockID . ", " . $_GET["task1Length"] . ")";
+
+	mysql_query($sql);
 
 	echo "success";
 
