@@ -99,7 +99,7 @@
     </script>
 
     <script>
-    function createClock(){
+    function createClock(tasks){
 
       var margin = {top: 350, right: 480, bottom: 350, left: 480},
           radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
@@ -131,7 +131,7 @@
 
       d3.json("test_data.json", function(error, root) {
 
-        var clockData = "{ 'name': 'clock', 'children': [{'name': 'animate', 'size': " + $("#task1Length") + "}, {'name': 'data', 'size': " + $("#task2Length") + "}]}";
+        var clockData = "{ 'name': 'clock', 'children': [{'name': 'animate', 'size': " + tasks[0] + "}, {'name': 'data', 'size': " + tasks[1] + "}]}";
 
         root = eval("(" + clockData + ")");
 

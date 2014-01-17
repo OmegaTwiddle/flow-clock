@@ -137,6 +137,9 @@ $(document).ready(function() {
 
     //create clock
     $(document.body).on("click", "#createClockConfirm", function(){
+        var tasks;
+        tasks.push($("#task1Length").val(), $("#task2Length").val());
+
         if (($("#clockName").val() != "") && ($("#task1Name").val() != "") && ($("#task1Length").val() != "")){
             $.ajax({
                 type: 'POST',
@@ -147,7 +150,7 @@ $(document).ready(function() {
                     console.log(msg);
                     if (msg == "success"){
                         $("#createClockModal .close-reveal-modal").click();
-                        createClock();
+                        createClock(tasks);
                     } 
                 } 
             });
