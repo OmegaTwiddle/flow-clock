@@ -11,7 +11,7 @@
 		$usernameExists = false;
 
 		//check if username exists
-		$dbconnection = mysql_connect("localhost", "root", "4lJX24OOa4qbi");
+		$dbconnection = mysql_connect("localhost", "", "");
 		mysql_select_db("mgsgo", $dbconnection);
 
 		$checkUsername = "SELECT user_name from users";

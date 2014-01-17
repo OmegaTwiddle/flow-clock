@@ -10,7 +10,7 @@
 		    $validUser = false;
 		    $validPass = false;
 		
-			$dbconnection = mysql_connect("localhost", "root", "4lJX24OOa4qbi");
+			$dbconnection = mysql_connect("localhost", "", "");
 			mysql_select_db("mgsgo", $dbconnection);
 			
 			$getUserPass = "SELECT * FROM users WHERE user_name='" . $userName . "'";

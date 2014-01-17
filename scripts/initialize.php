@@ -2,7 +2,7 @@
 
 	session_start();
 	
-	$dbconnection = mysql_connect("localhost", "root", "4lJX24OOa4qbi");
+	$dbconnection = mysql_connect("localhost", "", "");
 		
 	mysql_select_db("mgsgo", $dbconnection);
 	
