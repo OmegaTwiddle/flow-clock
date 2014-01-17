@@ -20,7 +20,11 @@
 
 	$result = mysql_query($sql);
 
-	
+	while($currentrow = mysql_fetch_array($result)){
+		$clockID = $currentrow["clock_id"];
+	}
+
+
 
 	echo "success";
 
