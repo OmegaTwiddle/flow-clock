@@ -8,14 +8,6 @@
 	$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
 	mysql_select_db("flow-clock", $dbconnection);
 
-	$sql = "INSERT INTO clocks
-			(name)
-			VALUES
-			('" . $_GET["clockName"] . "')";
-
-	mysql_query($sql);
-
-
 	
 
 	echo json_encode("success");
