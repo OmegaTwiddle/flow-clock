@@ -51,8 +51,7 @@
   {
    "name": "query",
    "children": [
-    {"name": "AggregateExpression", "size": 1616},
-    {"name": "And", "size": 1027}
+    {"name": "AggregateExpression", "size": 4416}
     
    ]
   },
