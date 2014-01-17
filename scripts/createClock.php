@@ -27,7 +27,7 @@
 
 	$sql = "INSERT INTO user_clocks 
 			(user_id, clock_id, is_owner) 
-			VALUESPOST
+			VALUES
 			(" . $_POST["userID"] . ", " . $clockID . ", 1)";
 
 	mysql_query($sql);
