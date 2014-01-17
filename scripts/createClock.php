@@ -40,6 +40,14 @@
 
 	mysql_query($sql);
 
+
+	$sql = "INSERT INTO clock_task 
+			(name, clock_id, seconds) 
+			VALUES 
+			('" . $_POST["task2Name"] . "', " . $clockID . ", " . $_POST["task2Length"] . ")";
+
+	mysql_query($sql);
+
 	echo "success";
 
 ?>

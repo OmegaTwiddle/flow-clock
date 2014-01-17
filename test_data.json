@@ -2,26 +2,10 @@
  "name": "flare",
  "children": [
   {
-   "name": "analytics",
-   "children": [
-    {
-     "name": "cluster",
-     "children": [
-      {"name": "AgglomerativeCluster", "size": 3938}
-     ]
-    },
-    {
-     "name": "graph",
-     "children": [
-      {"name": "MaxFlowMinCut", "size": 7840}
-     ]
-    }
-   ]
-  },
-  {
+   
    "name": "animate",
    "children": [
-    {"name": "Easing", "size": 17010}
+    {"name": "Easing", "size": 25}
    ]
   },
   {
@@ -30,49 +14,9 @@
     {
      "name": "converters",
      "children": [
-      {"name": "Converters", "size": 7201}
+      {"name": "Converters", "size": 5}
      ]
     }
-   ]
-  },
-  {
-   "name": "display",
-   "children": [
-   
-    {"name": "TextSprite", "size": 10066}
-   ]
-  },
-  {
-   "name": "flex",
-   "children": [
-    {"name": "FlareVis", "size": 4116}
-   ]
-  },
-  {
-   "name": "query",
-   "children": [
-    {"name": "AggregateExpression", "size": 4416}
-    
-   ]
-  },
-  {
-   "name": "scale",
-   "children": [
-    {"name": "IScaleMap", "size": 2105}
-   ]
-  },
-  {
-   "name": "util",
-   "children": [
-    
-    {"name": "Strings", "size": 22026}
-   ]
-  },
-  {
-   "name": "vis",
-   "children": [
-    
-    {"name": "Visualization", "size": 16540}
    ]
   }
  ]

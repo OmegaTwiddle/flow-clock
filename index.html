@@ -61,6 +61,8 @@
         <input id='clockName' type='text' name='name' placeholder='Flow Clock name'>
         <input id='task1Name' type='text' name='task1' placeholder='Task 1 name'>
         <input id='task1Length' type='text' name='task1Length' placeholder='Task 1 length'>
+        <input id='task2Name' type='text' name='task2' placeholder='Task 2 name'>
+        <input id='task2Length' type='text' name='task2Length' placeholder='Task 2 length'>
         <label id='createClockError'></label>
       </p>
       <button id='createClockConfirm' class='radius button'>Submit</button>
@@ -92,12 +94,12 @@
     
     <script src="components/foundation/js/jquery.js"></script>
     <script src="components/foundation/js/foundation.min.js"></script>
-    <script src="js/main.js"></script>
     <script>
       $(document).foundation();
     </script>
 
     <script>
+    function createClock(){
 
       var margin = {top: 350, right: 480, bottom: 350, left: 480},
           radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
@@ -128,6 +130,10 @@
           console.log(arc);
 
       d3.json("test_data.json", function(error, root) {
+
+        var clockData = "{ 'name': 'clock', 'children': [{'name': 'animate', 'size': " + $("#task1Length") + "}, {'name': 'data', 'size': " + $("#task2Length") + "}]}";
+
+        root = eval("(" + clockData + ")");
 
         // Compute the initial layout on the entire tree to sum sizes.
         // Also compute the full name and fill color for each node,
@@ -252,8 +258,11 @@
       }
 
       d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
+    }
 
     </script>
+
+    <script src="js/main.js"></script>
 
   </body>
 </html>

@@ -141,11 +141,13 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 url: 'scripts/createClock.php',
-                data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() },
+                data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() 
+                    , task2Name : $("#task2Name").val(), task1Length : $("#task2Length").val()},
                 success: function(msg){
                     console.log(msg);
                     if (msg == "success"){
-                        alert("Successful creation!");
+                        $("#createClockModal .close-reveal-modal").click();
+                        createClock();
                     } 
                 } 
             });
