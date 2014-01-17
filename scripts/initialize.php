@@ -12,7 +12,7 @@
 	include "cookieHandler.php";
 
 	if ($_SESSION['username']){
-		echo json_encode(array("username" => $_SESSION['username'], "userID" => $_SESSION['userID']);
+		echo json_encode(array("username" => $_SESSION['username'], "userID" => $_SESSION['userID']));
 	} 
 
 ?>
