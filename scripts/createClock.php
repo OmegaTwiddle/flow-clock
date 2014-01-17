@@ -26,6 +26,6 @@
 
 
 
-	echo "success";
+	echo $clockID;
 
 ?>
