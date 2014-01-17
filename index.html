@@ -27,14 +27,48 @@
 
   </head>
   <body>
+
+  <!-- LOGIN AND REGISTER MODALS
+  ============================== -->
+
+    <div id="loginModal" class="reveal-modal" style="display:none;" data-reveal>
+      <h2>Login</h2><br>
+      <p class="lead">
+        <input id='loginFirstInputField' type='text' name='username' placeholder='Username'>
+        <input id='password' type='password' name='password' placeholder='Password'>
+        <label id='loginError'></label>
+      </p>
+      <button id='loginConfirm' class='radius button'>Login</button>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="registerModal" class="reveal-modal" style="display:none;" data-reveal>
+      <h2>Register</h2><br>
+      <p class="lead">
+        <input id='registerFirstInputField' type='text' name='username' placeholder='Username'>
+        <input id='password' type='password' name='password' placeholder='Password'>
+        <input id='verifyPassword' type='password' name='verifyPassword' placeholder='Verify Password'>
+        <input id='email' type='text' name='email' placeholder='Email'>
+        <label id='registerError'></label>
+      </p>
+      <button id='registerConfirm' class='radius button'>Register</button>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+  <!-- ========================== -->
+
     
     <div class="row">
       <div class="large-12 columns">
-        <h1>FlowClock - Mike is a noob</h1>
+        <h1>FlowClock</h1>
+        <a href="#" data-reveal-id="loginModal" class="radius button">Login</a>
+        <a href="#" data-reveal-id="registerModal" class="radius button">Register</a>
+        <a href="#" id="logoutButton" class="radius button">Logout</a>
         <br>
         <div id="flowClockContainer"></div>
       </div>
     </div>
+
     
     <div class="row">
       <div class="large-12 columns">
@@ -45,6 +79,7 @@
     
     <script src="components/foundation/js/jquery.js"></script>
     <script src="components/foundation/js/foundation.min.js"></script>
+    <script src="js/main.js"></script>
     <script>
       $(document).foundation();
     </script>
