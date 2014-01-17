@@ -137,7 +137,7 @@ $(document).ready(function() {
 
     //create clock
     $(document.body).on("click", "#createClockConfirm", function(){
-        var tasks;
+        var tasks = [];
         tasks.push($("#task1Length").val(), $("#task2Length").val());
 
         if (($("#clockName").val() != "") && ($("#task1Name").val() != "") && ($("#task1Length").val() != "")){
