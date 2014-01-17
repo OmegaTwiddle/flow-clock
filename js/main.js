@@ -137,8 +137,14 @@ $(document).ready(function() {
 
     //create clock
     $(document.body).on("click", "#createClockConfirm", function(){
-        var tasks = [];
-        tasks.push($("#task1Length").val(), $("#task2Length").val());
+        var clockName = $("#clockName").val();
+
+        var taskLengths = [];
+        taskLengths.push($("#task1Length").val(), $("#task2Length").val());
+
+        var taskNames = [];
+        taskNames.push($("#task1Name").val(), $("#task2Name").val());
+
 
         if (($("#clockName").val() != "") && ($("#task1Name").val() != "") && ($("#task1Length").val() != "")){
             $.ajax({
@@ -150,7 +156,7 @@ $(document).ready(function() {
                     console.log(msg);
                     if (msg == "success"){
                         $("#createClockModal .close-reveal-modal").click();
-                        createClock(tasks);
+                        createClock(clockName, taskNames, taskLengths);
                     } 
                 } 
             });
