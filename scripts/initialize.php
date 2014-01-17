@@ -2,7 +2,7 @@
 
 	session_start();
 
-	$fileContent = readfile('dbInfo.txt');
+	$fileContent = file('dbInfo.txt');
 
 	//check if username exists
 	$dbconnection = mysql_connect("localhost", $fileContent[0], $fileContent[1]);
