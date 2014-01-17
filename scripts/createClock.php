@@ -25,7 +25,14 @@
 	}
 
 
+	$sql = "INSERT INTO user_clocks 
+			(user_id, clock_id, is_owner) 
+			VALUES
+			(" . $_GET["userID"] ", " . $clockID . ", 1)";
 
-	echo $clockID;
+	mysql_query($sql);
+
+
+	echo "success";
 
 ?>
