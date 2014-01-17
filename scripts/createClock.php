@@ -15,6 +15,8 @@
 
 	mysql_query($sql);
 
+	echo $_GET["clockName"];
+
 
 	$sql = "SELECT clock_id FROM clocks WHERE name='" . $_GET["clockName"] . "' ORDER BY clock_id DESC limit 1";
 
