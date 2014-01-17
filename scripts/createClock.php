@@ -11,12 +11,12 @@
 	$sql = "INSERT INTO clocks
 			(name)
 			VALUES
-			('" . $_GET["clockName"] . "')";
+			('" . $_POST["clockName"] . "')";
 
 	mysql_query($sql);
 
 
-	$sql = "SELECT clock_id FROM clocks WHERE name='" . $_GET["clockName"] . "' ORDER BY clock_id DESC limit 1";
+	$sql = "SELECT clock_id FROM clocks WHERE name='" . $_POST["clockName"] . "' ORDER BY clock_id DESC limit 1";
 
 	$result = mysql_query($sql);
 
@@ -27,8 +27,8 @@
 
 	$sql = "INSERT INTO user_clocks 
 			(user_id, clock_id, is_owner) 
-			VALUES
-			(" . $_GET["userID"] . ", " . $clockID . ", 1)";
+			VALUESPOST
+			(" . $_POST["userID"] . ", " . $clockID . ", 1)";
 
 	mysql_query($sql);
 
@@ -36,7 +36,7 @@
 	$sql = "INSERT INTO clock_task 
 			(name, clock_id, seconds) 
 			VALUES 
-			('" . $_GET["task1Name"] . "', " . $clockID . ", " . $_GET["task1Length"] . ")";
+			('" . $_POST"task1Name"] . "', " . $clockID . ", " . $_POST["task1Length"] . ")";
 
 	mysql_query($sql);
 
