@@ -11,6 +11,10 @@
 	
 	include "cookieHandler.php";
 
-	echo json_encode($fileContent);
+	if ($_SESSION['username']){
+		echo json_encode($_SESSION['username'] . " is logged in!");
+	} else {
+		echo json_encode("");
+	}
 
 ?>

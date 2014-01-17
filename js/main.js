@@ -5,9 +5,7 @@ $(document).ready(function() {
         type: 'GET',
         url: 'scripts/initialize.php',
         success: function(msg){
-            $(document.body).prepend(msg + " is logged in!");
-
-
+            $(document.body).prepend(msg);
         } 
     });
 
