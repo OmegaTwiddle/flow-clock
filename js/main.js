@@ -5,7 +5,8 @@ $(document).ready(function() {
         type: 'GET',
         url: 'scripts/initialize.php',
         success: function(msg){
-            $(document.body).prepend(msg);
+            $(document.body).prepend(msg.username + " is logged in!");
+            $(document.body).append("<div hidden id='hiddenUserID'>" + msg.userID + "</div>");
         } 
     });
 
@@ -131,5 +132,32 @@ $(document).ready(function() {
                 location.reload();
             }
         });
+    });
+
+    //create clock
+    $(document.body).on("click", "#createClockConfirm", function(){
+        if (($("#clockName").val() != "") && ($("#task1Name").val() != "") && ($("#task1Length").val() != "")){
+            $.ajax({
+                type: 'POST',
+                url: 'scripts/createClock.php',
+                data: { userID : , clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() },
+                success: function(msg){
+                    if (msg.status == "success"){
+                        var cookie_str = "jsauth=" + msg.auth_token + "; expires=Mon, 1 Jan 2035 00:00:01 UTC; path=/";
+                        document.cookie = cookie_str;
+                        location.reload();
+                    } else if (msg.status == "badInput") {
+                        $("#loginError").html("<em>Wrong username or password</em>");
+                        $("#loginError").fadeIn("slow");
+                    } else {
+                        $("#loginError").html("<em>Something went wrong, try again</em>");
+                        $("#loginError").fadeIn("slow");
+                    }
+                } 
+            });
+        } else {
+            $("#createClockError").html("<em>Please enter a clock name, task name, and task length</em>");
+            $("#createClockError").fadeIn("slow");
+        }
     });
 });

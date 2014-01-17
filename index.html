@@ -55,6 +55,18 @@
       <a class="close-reveal-modal">&#215;</a>
     </div>
 
+    <div id="createClockModal" class="reveal-modal" style="display:none;" data-reveal>
+      <h2>Create a Flow Clock!</h2><br>
+      <p class="lead">
+        <input id='clockName' type='text' name='name' placeholder='Flow Clock name'>
+        <input id='task1Name' type='text' name='task1' placeholder='Task 1 name'>
+        <input id='task1Length' type='text' name='task1Length' placeholder='Task 1 length'>
+        <label id='createClockError'></label>
+      </p>
+      <button id='createClockConfirm' class='radius button'>Submit</button>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
   <!-- ========================== -->
 
     
@@ -64,6 +76,7 @@
         <a href="#" data-reveal-id="loginModal" class="radius button">Login</a>
         <a href="#" data-reveal-id="registerModal" class="radius button">Register</a>
         <a href="#" id="logoutButton" class="radius button">Logout</a>
+        <a href="#" data-reveal-id="createClockModal" class="radius button">Create Flow Clock</a>
         <br>
         <div id="flowClockContainer"></div>
       </div>
