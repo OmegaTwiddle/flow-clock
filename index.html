@@ -132,8 +132,16 @@
 
         console.log(clockName, taskNames, taskLengths);
 
-        var clockData = "{ 'name': '" + clockName + "', 'children': [{'name': '" + taskNames[0] + "', 'size': " + taskLengths[0] + "}, {'name': '" + taskNames[1] + "', 'size': " + taskLengths[1] + "}]}";
+        var clockData = "{ 'name': '" + clockName + "', 'children': ["; 
 
+        for (var i = 0; i < taskNames.length; i++){
+          if (i == taskNames.length - 1){
+            clockData = clockData + "{'name': '" + taskNames[i] + "', 'size': " + taskLengths[i] + "}]}";
+          } else {
+            clockData = clockData + "{'name': '" + taskNames[i] + "', 'size': " + taskLengths[i] + "},";
+          } 
+        }
+        
         root = eval("(" + clockData + ")");
 
         // Compute the initial layout on the entire tree to sum sizes.
