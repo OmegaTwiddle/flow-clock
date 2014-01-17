@@ -5,7 +5,7 @@
 	list($user, $pass, $extra) = explode(",", file_get_contents('dbInfo.txt'));
 
 	//check if username exists
-	$dbconnection = mysql_connect("localhost", $user, $pass);
+	$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
 		
 	mysql_select_db("mgsgo", $dbconnection);
 	
