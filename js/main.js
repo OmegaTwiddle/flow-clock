@@ -144,16 +144,8 @@ $(document).ready(function() {
                 data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() },
                 success: function(msg){
                     if (msg.status == "success"){
-                        var cookie_str = "jsauth=" + msg.auth_token + "; expires=Mon, 1 Jan 2035 00:00:01 UTC; path=/";
-                        document.cookie = cookie_str;
-                        location.reload();
-                    } else if (msg.status == "badInput") {
-                        $("#loginError").html("<em>Wrong username or password</em>");
-                        $("#loginError").fadeIn("slow");
-                    } else {
-                        $("#loginError").html("<em>Something went wrong, try again</em>");
-                        $("#loginError").fadeIn("slow");
-                    }
+                        alert("Successful creation!");
+                    } 
                 } 
             });
         } else {

@@ -1,0 +1,41 @@
+<?php
+	
+	session_start();
+
+	list($user, $pass, $extra) = explode(",", file_get_contents('/home/flow-clock/conf/db_conf'));
+
+	//check if username exists
+	$dbconnection = mysql_connect("localhost", (string)$user, (string)$pass);
+	mysql_select_db("flow-clock", $dbconnection);
+
+	$sql = "INSERT INTO clocks
+			(name)
+			VALUES
+			('" . $_GET["clockName"] . "')";
+
+	mysql_query($sql);
+
+
+	$sql = "SELECT clock_id FROM clocks WHERE name='" $_GET["clockName"] . "' ORDER BY clock_id DESC limit 1";
+
+	$clockID = mysql_query($sql);
+
+
+	$sql = "INSERT INTO user_clocks 
+			(user_id, clock_id, is_owner) 
+			VALUES
+			('" . $_GET["userID"] "', '" . $clockID . "', 1)";
+
+	mysql_query($sql);
+
+
+	$sql = "INSERT INTO clock_tasks 
+			(name, clock_id, seconds) 
+			VALUES 
+			('" . $_GET["task1Name"] . "', '" . $clockID . "', '" . $_GET["task1Length"] . "')";
+
+	mysql_query($sql);
+
+	echo json_encode("success");
+
+?>
