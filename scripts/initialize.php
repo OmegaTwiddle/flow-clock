@@ -13,8 +13,6 @@
 
 	if ($_SESSION['username']){
 		echo json_encode($_SESSION['username'] . " is logged in!");
-	} else {
-		echo json_encode($user . " " . $pass);
-	}
+	} 
 
 ?>
