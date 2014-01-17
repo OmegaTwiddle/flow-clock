@@ -15,32 +15,12 @@
 
 	mysql_query($sql);
 
-	echo $_GET["clockName"];
-
 
 	$sql = "SELECT clock_id FROM clocks WHERE name='" . $_GET["clockName"] . "' ORDER BY clock_id DESC limit 1";
 
 	$result = mysql_query($sql);
 
-	while($currentrow = mysql_fetch_array($result)){
-		$clockID = $currentrow["clock_id"];
-	}
-
-
-	$sql = "INSERT INTO user_clocks 
-			(user_id, clock_id, is_owner) 
-			VALUES
-			(" . $_GET["userID"] ", " . $clockID . ", 1)";
-
-	mysql_query($sql);
-
-
-	$sql = "INSERT INTO clock_task 
-			(name, clock_id, seconds) 
-			VALUES 
-			('" . $_GET["task1Name"] . "', " . $clockID . ", " . $_GET["task1Length"] . ")";
-
-	mysql_query($sql);
+	
 
 	echo "success";
 
