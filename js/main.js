@@ -5,6 +5,7 @@ $(document).ready(function() {
         type: 'GET',
         url: 'scripts/initialize.php',
         success: function(msg){
+            console.log(msg);
             $(document.body).prepend(msg.username + " is logged in!");
             $(document.body).append("<div hidden id='hiddenUserID'>" + msg.userID + "</div>");
         } 
