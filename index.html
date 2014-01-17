@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -130,6 +129,8 @@
           console.log(arc);
 
       d3.json("test_data.json", function(error, root) {
+
+        console.log(clockName, taskNames, taskLengths);
 
         var clockData = "{ 'name': " + clockName + ", 'children': [{'name': " + taskNames[0] + ", 'size': " + taskLengths[0] + "}, {'name': " + taskNames[1] + ", 'size': " + taskLengths[1] + "}]}";
 
