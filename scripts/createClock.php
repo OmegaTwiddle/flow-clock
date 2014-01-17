@@ -18,7 +18,11 @@
 
 	$sql = "SELECT clock_id FROM clocks WHERE name='" $_GET["clockName"] . "' ORDER BY clock_id DESC limit 1";
 
-	$clockID = mysql_query($sql);
+	$result = mysql_query($sql);
+
+	while($currentrow = mysql_fetch_array($result)){
+		$clockID = $currentrow["clock_id"];
+	}
 
 
 	$sql = "INSERT INTO user_clocks 
