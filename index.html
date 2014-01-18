@@ -58,12 +58,12 @@
       <h2>Create a Flow Clock!</h2><br>
       <p class="lead">
         <input id='clockName' type='text' name='name' placeholder='Flow Clock name'>
-        <input id='task1Name' type='text' name='task1' placeholder='Task 1 name'>
-        <input id='task1Length' type='text' name='task1Length' placeholder='Task 1 length'>
-        <input id='task2Name' type='text' name='task2' placeholder='Task 2 name'>
-        <input id='task2Length' type='text' name='task2Length' placeholder='Task 2 length'>
+        Task 1
+        <input id='task1Name' class="taskNames" type='text' name='task1' placeholder='Name'>
+        <input id='task1Length' class="taskLengths" type='text' name='task1Length' placeholder='Time (seconds)'>
         <label id='createClockError'></label>
       </p>
+      <button id='newTaskButton' class='radius button success'>New Task</button>
       <button id='createClockConfirm' class='radius button'>Submit</button>
       <a class="close-reveal-modal">&#215;</a>
     </div>

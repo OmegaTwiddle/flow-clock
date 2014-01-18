@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var numTasks = 1;
+
     //initialize some php stuff
     $.ajax({
         type: 'GET',
@@ -140,18 +142,21 @@ $(document).ready(function() {
         var clockName = $("#clockName").val();
 
         var taskLengths = [];
-        taskLengths.push($("#task1Length").val(), $("#task2Length").val());
+        for (var i = 0; i < $(".taskLengths").length; i++){
+            taskLengths.push($(".taskLengths")[i].val());
+        }
 
         var taskNames = [];
-        taskNames.push($("#task1Name").val(), $("#task2Name").val());
+        for (var i = 0; i < $(".taskNames").length; i++){
+            taskNames.push($(".taskNames")[i].val());
+        }
 
 
         if (($("#clockName").val() != "") && ($("#task1Name").val() != "") && ($("#task1Length").val() != "")){
             $.ajax({
                 type: 'POST',
                 url: 'scripts/createClock.php',
-                data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), task1Name : $("#task1Name").val(), task1Length : $("#task1Length").val() 
-                    , task2Name : $("#task2Name").val(), task1Length : $("#task2Length").val()},
+                data: { userID : $("#hiddenUserID").html(), clockName : $("#clockName").val(), taskNames : taskNames, taskLengths : taskLengths},
                 success: function(msg){
                     console.log(msg);
                     if (msg == "success"){
@@ -164,5 +169,12 @@ $(document).ready(function() {
             $("#createClockError").html("<em>Please enter a clock name, task name, and task length</em>");
             $("#createClockError").fadeIn("slow");
         }
+    });
+
+    //add task
+    $(document.body).on("click", "#newTaskButton", function(){
+        numTasks++;
+        var html = "<br>Task " + numTasks + " <input id='taskName" + numTasks + "' class='taskNames' type='text' name='task' placeholder='Name'><input id='taskLength" + numTasks + "' class='taskLengths' type='text' name='task' placeholder='Time (seconds)'>";
+        $("#createClockError").before(html);
     });
 });

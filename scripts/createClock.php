@@ -33,20 +33,14 @@
 	mysql_query($sql);
 
 
-	$sql = "INSERT INTO clock_task 
+	for ($i = 0; $i < count($_POST["taskNames"]); $i++){
+		$sql = "INSERT INTO clock_task 
 			(name, clock_id, seconds) 
 			VALUES 
-			('" . $_POST["task1Name"] . "', " . $clockID . ", " . $_POST["task1Length"] . ")";
+			('" . $_POST["taskNames"][i] . "', " . $clockID . ", " . $_POST["taskLengths"][i] . ")";
 
-	mysql_query($sql);
-
-
-	$sql = "INSERT INTO clock_task 
-			(name, clock_id, seconds) 
-			VALUES 
-			('" . $_POST["task2Name"] . "', " . $clockID . ", " . $_POST["task2Length"] . ")";
-
-	mysql_query($sql);
+		mysql_query($sql);
+	}
 
 	echo "success";
 
