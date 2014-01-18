@@ -177,4 +177,9 @@ $(document).ready(function() {
         var html = "<br>Task " + numTasks + " <input id='taskName" + numTasks + "' class='taskNames' type='text' name='task' placeholder='Name'><input id='taskLength" + numTasks + "' class='taskLengths' type='text' name='task' placeholder='Time (seconds)'>";
         $("#createClockError").before(html);
     });
+
+
+    $(document.body).on("hover", "#flowClockContainer path", funtion(){
+        console.log($(this).attr("id"));
+    });
 });
