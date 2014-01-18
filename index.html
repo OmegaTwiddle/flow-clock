@@ -30,6 +30,7 @@
   <!-- LOGIN AND REGISTER MODALS
   ============================== -->
 
+
     <div id="loginModal" class="reveal-modal" style="display:none;" data-reveal>
       <h2>Login</h2><br>
       <p class="lead">
@@ -79,10 +80,13 @@
         <a href="#" id="logoutButton" class="radius button">Logout</a>
         <a href="#" data-reveal-id="createClockModal" class="radius button">Create Flow Clock</a>
         <br>
+        <div id="clockInfo">
+          Clock name: <span id="cName"></span><br><br>
+          Hovered task: <span id="cTask"></span>
+        </div>
         <div id="flowClockContainer"></div>
       </div>
     </div>
-
     
     <div class="row">
       <div class="large-12 columns">

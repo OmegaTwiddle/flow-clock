@@ -161,6 +161,7 @@ $(document).ready(function() {
                     console.log(msg);
                     if (msg == "success"){
                         $("#createClockModal .close-reveal-modal").click();
+                        $("#cName").html(clockName);
                         createClock(clockName, taskNames, taskLengths);
                     } 
                 } 
@@ -179,7 +180,13 @@ $(document).ready(function() {
     });
 
 
-    $(document.body).on("mouseover", "#flowClockContainer path", function(){
-        console.log($(this).attr("id"));
+    $(document.body).on("mouseenter", "#flowClockContainer path", function(){
+        $("#cTask").html($(this).attr("id"));
     });
+
+    $(document.body).on("mouseleave", "#flowClockContainer g", function(){
+        $("#cTask").html("");
+    });
+
+    //createClock("asd", ["brush teeth", "shower"], ["120", "300"]);
 });
