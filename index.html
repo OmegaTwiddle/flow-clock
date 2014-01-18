@@ -131,7 +131,7 @@
           .clamp(true)
           .range([90, 20]);
 
-      var svg = d3.select(selector).append("svg")
+      var svg = d3.select("#flowClockContainer").append("svg")
           .attr("width", margin.left + margin.right)
           .attr("height", margin.top + margin.bottom)
         .append("g")
