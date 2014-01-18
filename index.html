@@ -308,7 +308,7 @@
                   for (var i = 1; i < taskNames.length; i++){
                     if (root.children[i].size > 0){
                       root.children[i].size--;
-                      $("#cCurrentTask").html(root.children[i].name);
+                      $("#cCurrentTask").html(root.children[i].name + " -- " + root.children[i].size + " seconds left!");
                       break;
                     }
                   }
@@ -319,7 +319,7 @@
               
               zoom(root, "asd");
 
-          }, 100);
+          }, 1000);
       });
 
       function key(d) {
