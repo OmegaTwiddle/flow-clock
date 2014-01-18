@@ -9,9 +9,9 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(msg){
             if (msg.userID != "-1"){
-                $("#loginButton").attr("hidden", "hidden");
-                $("#registerButton").attr("hidden", "hidden");
-                $("#logoutButton").removeAttr("hidden");
+                $("#loginButton").parent().attr("hidden", "hidden");
+                $("#registerButton").parent().attr("hidden", "hidden");
+                $("#logoutButton").parent().removeAttr("hidden");
             } 
 
             $(document.body).append("<div hidden id='hiddenUserID'>" + msg.userID + "</div>");
