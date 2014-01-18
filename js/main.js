@@ -208,7 +208,7 @@ $(document).ready(function() {
         window.clearInterval(clockInterval);
         $("#cName").html("Test clock");
         $("#clockInfo").removeAttr("hidden");
-        createClock("#flowClockContainer", "asd", ["dummyTask", "brush teeth", "shower", "put clothes on", "eat breakfast"], ["0", "120", "70", "50", "50"]);
+        createClock("Test clock", ["dummyTask", "brush teeth", "shower", "put clothes on", "eat breakfast"], ["0", "120", "70", "50", "50"]);
     });
 
 });
