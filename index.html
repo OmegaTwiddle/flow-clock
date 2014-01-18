@@ -174,7 +174,7 @@
             .data(partition.nodes(root).slice(1))
           .enter().append("path")
             .attr("d", arc)
-            .attr("id", function(d) { d.name; })
+            .attr("id", function(d) { return d.name; })
             .style("fill", function(d) { return d.fill; })
             .each(function(d) { this._current = updateArc(d); })
             .on("click", zoomIn);
