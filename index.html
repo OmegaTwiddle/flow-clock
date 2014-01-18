@@ -100,6 +100,8 @@
     </script>
 
     <script>
+    var clockInterval;
+    
     function createClock(selector, clockName, taskNames, taskLengths){
 
       var margin = {top: 350, right: 480, bottom: 350, left: 480},
@@ -261,7 +263,7 @@
             totalTaskTime = totalTaskTime + parseInt(taskLengths[i]);
         }
 
-        var clockInterval = setInterval(function(){
+        clockInterval = setInterval(function(){
               counter ++;
               dummyTaskTime++;
               currTaskTime--;

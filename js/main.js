@@ -200,6 +200,7 @@ $(document).ready(function() {
     //test clock
     $(document.body).on("click", "#testClockButton", function(){
         $("#flowClockContainer").empty();
+        window.clearInterval(clockInterval);
         $("#cName").html("Test clock");
         $("#clockInfo").removeAttr("hidden");
         createClock("#flowClockContainer", "asd", ["dummyTask", "brush teeth", "shower", "put clothes on", "eat breakfast"], ["0", "120", "70", "50", "50"]);
