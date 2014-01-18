@@ -147,11 +147,18 @@ $(document).ready(function() {
         var clockName = $("#clockName").val();
 
         var taskLengths = [];
+
+        //dummy task length
+        taskLengths.push(0);
+
         for (var i = 0; i < $(".taskLengths").length; i++){
             taskLengths.push($(".taskLengths")[i].value);
         }
 
         var taskNames = [];
+
+        //dummy task name
+        taskNames.push("dummyTask");
         for (var i = 0; i < $(".taskNames").length; i++){
             taskNames.push($(".taskNames")[i].value);
         }
