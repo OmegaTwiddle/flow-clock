@@ -204,8 +204,15 @@
             .style("opacity", function(d) { if (d.name == "dummyTask") return 0; else return 1; })
             .style("fill", function(d) { return d.fill; })
             .each(function(d) { this._current = updateArc(d); })
-            .on("click", zoomIn);
+            .on("click", taskOptions);
 
+
+        function taskOptions(p) {
+          console.log(p);
+          if (p.name != "dummyTask"){
+              p.size = p.size + 60;
+          }
+        }
 
         function zoomIn(p) {
           console.log(p);
@@ -264,7 +271,7 @@
                 .style("fill-opacity", function(d) { return d.depth === 2 - (root === p) ? 1 : 0; })
                 .style("fill", function(d) { return d.fill; })
                 .attr("id", function(d) { return d.name; })
-                .on("click", zoomIn)
+                .on("click", taskOptions)
                 .each(function(d) { this._current = enterArc(d); });
 
             path.transition()
@@ -283,9 +290,9 @@
         var intervalCounter = 0;
 
         clockInterval = setInterval(function(){
-              counter ++;
-              dummyTaskTime++;
-              currTaskTime--;
+              // counter ++;
+              // dummyTaskTime++;
+              // currTaskTime--;
 
               d3.json("test_data.json", function(error, root) {
 
@@ -295,7 +302,7 @@
                   if (i == taskNames.length - 1){
                     clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + taskLengths[i] + "}]}";
                   } else {
-                    clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + (taskLengths[i] + dummyTaskTime) + "},";
+                    clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + taskLengths[i] + "},";
                   } 
                 }
                 
@@ -319,7 +326,7 @@
                     .style("opacity", function(d) { if (d.name == "dummyTask") return 0; else return 1; })
                     .style("fill", function(d) { return d.fill; })
                     .each(function(d) { this._current = updateArc(d); })
-                    .on("click", zoomIn);
+                    .on("click", taskOptions);
               });
               
               if (root.children[0].size < totalTaskTime){
