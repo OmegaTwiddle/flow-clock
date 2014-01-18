@@ -143,12 +143,12 @@ $(document).ready(function() {
 
         var taskLengths = [];
         for (var i = 0; i < $(".taskLengths").length; i++){
-            taskLengths.push($(".taskLengths")[i].val());
+            taskLengths.push($(".taskLengths")[i].value;
         }
 
         var taskNames = [];
         for (var i = 0; i < $(".taskNames").length; i++){
-            taskNames.push($(".taskNames")[i].val());
+            taskNames.push($(".taskNames")[i].value;
         }
 
 
