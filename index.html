@@ -25,7 +25,7 @@
     </style>
 
   </head>
-  <body>
+  <body style="background-color:rgba(0, 110, 174, 0.701961);">
 
   <!-- LOGIN AND REGISTER MODALS
   ============================== -->
@@ -71,16 +71,36 @@
 
   <!-- ========================== -->
 
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">FlowClock</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li ><a id="loginButton" data-reveal-id="loginModal" href="#">Login</a></li>
+          <li ><a id="registerButton" data-reveal-id="registerModal" href="#">Register</a></li>
+          <li hidden><a id="logoutButton" href="#">Logout</a></li>
+          <li class="has-dropdown">
+            <a href="#">Create</a>
+            <ul class="dropdown">
+              <li><a data-reveal-id="createClockModal" href="#">New FlowClock</a></li>
+              <li><a id="testClockButton" href="#">Test FlowClock</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </section>
+    </nav>
+
     
     <div class="row">
       <div class="large-12 columns">
-        <h1>FlowClock</h1>
-        <a href="#" data-reveal-id="loginModal" class="radius button">Login</a>
-        <a href="#" data-reveal-id="registerModal" class="radius button">Register</a>
-        <a href="#" id="logoutButton" class="radius button">Logout</a>
-        <a href="#" data-reveal-id="createClockModal" class="radius button">Create Flow Clock</a>
-        <a href="#" id="testClockButton" class="radius button success">Create Test Clock</a>
-        <br>
+        <br><br>
         <div hidden id="clockInfo">
           Clock name: <span id="cName"></span><br><br>
           Current task: <span id="cCurrentTask"></span><br><br>
@@ -90,9 +110,6 @@
       </div>
     </div>
     
-  
-
-    
     <script src="components/foundation/js/jquery.js"></script>
     <script src="components/foundation/js/foundation.min.js"></script>
     <script>
@@ -101,7 +118,7 @@
 
     <script>
     var clockInterval;
-    
+
     function createClock(selector, clockName, taskNames, taskLengths){
 
       var margin = {top: 350, right: 480, bottom: 350, left: 480},
@@ -234,7 +251,7 @@
           // Exiting outside arcs transition to the new layout.
           if (root !== p) enterArc = insideArc, exitArc = outsideArc, outsideAngle.range([p.x, p.x + p.dx]);
 
-          $("#flowClockContainer path").remove();
+          
 
           d3.transition().duration(0.1).each(function() {
             path.exit().transition()
@@ -262,6 +279,8 @@
         for (var i = 0; i < taskNames.length; i++){
             totalTaskTime = totalTaskTime + parseInt(taskLengths[i]);
         }
+
+        var intervalCounter = 0;
 
         clockInterval = setInterval(function(){
               counter ++;
@@ -317,6 +336,13 @@
                   window.clearInterval(clockInterval);
                   alert("Done!");
               }
+
+              if (intervalCounter < 2){
+                  intervalCounter++;
+              } else {
+                  $("#flowClockContainer path").remove();
+              }
+              
               
               zoom(root, "asd");
 

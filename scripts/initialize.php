@@ -13,6 +13,8 @@
 
 	if ($_SESSION['username']){
 		echo json_encode(array("username" => $_SESSION['username'], "userID" => $_SESSION['userID']));
-	} 
+	} else {
+		echo json_encode(array("userID" => "-1");
+	}
 
 ?>

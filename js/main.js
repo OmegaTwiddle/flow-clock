@@ -8,7 +8,12 @@ $(document).ready(function() {
         url: 'scripts/initialize.php',
         dataType: 'json',
         success: function(msg){
-            $(document.body).prepend(msg.username + " is logged in!");
+            if (msg.userID != "-1"){
+                $("#loginButton").attr("hidden", "hidden");
+                $("#registerButton").attr("hidden", "hidden");
+                $("#logoutButton").removeAttr("hidden");
+            } 
+
             $(document.body).append("<div hidden id='hiddenUserID'>" + msg.userID + "</div>");
         } 
     });
