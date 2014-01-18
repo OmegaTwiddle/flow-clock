@@ -152,7 +152,7 @@
       var counter = 0;
 
       var clockData = "";
-
+      var totalTaskTime;
       var path;
 
       d3.json("test_data.json", function(error, root) {
@@ -211,6 +211,7 @@
           console.log(p);
           if (p.name != "dummyTask"){
               p.size = p.size + 60;
+              totalTaskTime = totalTaskTime + 60;
           }
         }
 
@@ -281,7 +282,7 @@
           });
         }
 
-        var totalTaskTime = 0;
+        totalTaskTime = 0;
 
         for (var i = 0; i < taskNames.length; i++){
             totalTaskTime = totalTaskTime + parseInt(taskLengths[i]);
