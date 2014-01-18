@@ -162,6 +162,7 @@ $(document).ready(function() {
                     if (msg == "success"){
                         $("#createClockModal .close-reveal-modal").click();
                         $("#cName").html(clockName);
+                        $("#clockInfo").removeAttr("hidden");
                         createClock(clockName, taskNames, taskLengths);
                     } 
                 } 
@@ -188,5 +189,19 @@ $(document).ready(function() {
         $("#cTask").html("");
     });
 
-    //createClock("asd", ["brush teeth", "shower"], ["120", "300"]);
+    $(document.body).on("mouseenter", "#dummyFlowClockContainer path", function(){
+        $("#cTask").html($(this).attr("id"));
+    });
+
+    $(document.body).on("mouseleave", "#dummyFlowClockContainer g", function(){
+        $("#cTask").html("");
+    });
+
+    //test clock
+    $(document.body).on("click", "#testClockButton", function(){
+        $("#cName").html("Test clock");
+        $("#clockInfo").removeAttr("hidden");
+        createClock("#flowClockContainer", "asd", ["dummyTask", "brush teeth", "shower", "put clothes on", "eat breakfast"], ["0", "120", "70", "50", "50"]);
+    });
+
 });

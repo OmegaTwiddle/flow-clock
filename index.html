@@ -79,20 +79,19 @@
         <a href="#" data-reveal-id="registerModal" class="radius button">Register</a>
         <a href="#" id="logoutButton" class="radius button">Logout</a>
         <a href="#" data-reveal-id="createClockModal" class="radius button">Create Flow Clock</a>
+        <a href="#" id="testClockButton" class="radius button success">Create Test Clock</a>
         <br>
-        <div id="clockInfo">
+        <div hidden id="clockInfo">
           Clock name: <span id="cName"></span><br><br>
+          Current task: <span id="cCurrentTask"></span><br><br>
           Hovered task: <span id="cTask"></span>
         </div>
         <div id="flowClockContainer"></div>
+        <div id="dummyFlowClockContainer"></div>
       </div>
     </div>
     
-    <div class="row">
-      <div class="large-12 columns">
-      	
-      </div>
-    </div>
+  
 
     
     <script src="components/foundation/js/jquery.js"></script>
@@ -102,7 +101,7 @@
     </script>
 
     <script>
-    function createClock(clockName, taskNames, taskLengths){
+    function createClock(selector, clockName, taskNames, taskLengths){
 
       var margin = {top: 350, right: 480, bottom: 350, left: 480},
           radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
@@ -114,35 +113,39 @@
           .clamp(true)
           .range([90, 20]);
 
-      var svg = d3.select("#flowClockContainer").append("svg")
+      var svg = d3.select(selector).append("svg")
           .attr("width", margin.left + margin.right)
           .attr("height", margin.top + margin.bottom)
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       var partition = d3.layout.partition()
-          .sort(function(a, b) { return d3.ascending(a.name, b.name); })
+          .sort(function(a, b) { return d3.ascending(a.order, b.order); })
           .size([2 * Math.PI, radius]);
 
       var arc = d3.svg.arc()
           .startAngle(function(d) { return d.x; })
-          .endAngle(function(d) { return d.x + d.dx - .01 / (d.depth + .5); })
-          .innerRadius(function(d) { return 40; })
+          .endAngle(function(d) { return d.x + d.dx - .000001 / (d.depth + .5); })
+          .innerRadius(function(d) { return 50; })
           .outerRadius(function(d) { return 300; });
 
-          console.log(arc);
+      var dummyTaskTime = 0;
+      var currTaskTime = 100;
+      var counter = 0;
+
+      var clockData = "";
+
+      var path;
 
       d3.json("test_data.json", function(error, root) {
 
-        console.log(clockName, taskNames, taskLengths);
-
-        var clockData = "{ 'name': '" + clockName + "', 'children': ["; 
+        clockData = "{ 'name': '" + clockName + "', 'children': [";
 
         for (var i = 0; i < taskNames.length; i++){
           if (i == taskNames.length - 1){
-            clockData = clockData + "{'name': '" + taskNames[i] + "', 'size': " + taskLengths[i] + "}]}";
+            clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + taskLengths[i] + "}]}";
           } else {
-            clockData = clockData + "{'name': '" + taskNames[i] + "', 'size': " + taskLengths[i] + "},";
+            clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + taskLengths[i] + "},";
           } 
         }
         
@@ -167,6 +170,7 @@
             .children(function(d, depth) { return depth < 2 ? d._children : null; })
             .value(function(d) { return d.sum; });
 
+
         var center = svg.append("circle")
             .attr("r", radius / 3)
             .on("click", zoomOut);
@@ -174,16 +178,19 @@
         center.append("title")
             .text("zoom out");
 
-        var path = svg.selectAll("path")
+        path = svg.selectAll("path")
             .data(partition.nodes(root).slice(1))
           .enter().append("path")
             .attr("d", arc)
             .attr("id", function(d) { return d.name; })
+            .style("opacity", function(d) { if (d.name == "dummyTask") return 0; else return 1; })
             .style("fill", function(d) { return d.fill; })
             .each(function(d) { this._current = updateArc(d); })
             .on("click", zoomIn);
 
+
         function zoomIn(p) {
+          console.log(p);
           if (p.depth > 1) p = p.parent;
           if (!p.children) return;
           zoom(p, p);
@@ -195,7 +202,7 @@
         }
 
         // Zoom to the specified new root.
-        function zoom(root, p) {
+        function zoom(root, p, time) {
           if (document.documentElement.__transition__) return;
 
           // Rescale outside angles to match the new layout.
@@ -226,23 +233,93 @@
           // Exiting outside arcs transition to the new layout.
           if (root !== p) enterArc = insideArc, exitArc = outsideArc, outsideAngle.range([p.x, p.x + p.dx]);
 
-          d3.transition().duration(d3.event.altKey ? 7500 : 750).each(function() {
+          $("#flowClockContainer path").remove();
+
+          d3.transition().duration(0.1).each(function() {
             path.exit().transition()
                 .style("fill-opacity", function(d) { return d.depth === 1 + (root === p) ? 1 : 0; })
+                .attr("id", function(d) { return d.name; })
                 .attrTween("d", function(d) { return arcTween.call(this, exitArc(d)); })
                 .remove();
 
             path.enter().append("path")
                 .style("fill-opacity", function(d) { return d.depth === 2 - (root === p) ? 1 : 0; })
                 .style("fill", function(d) { return d.fill; })
+                .attr("id", function(d) { return d.name; })
                 .on("click", zoomIn)
                 .each(function(d) { this._current = enterArc(d); });
 
             path.transition()
                 .style("fill-opacity", 1)
+                .attr("id", function(d) { return d.name; })
                 .attrTween("d", function(d) { return arcTween.call(this, updateArc(d)); });
           });
         }
+
+        var totalTaskTime = 0;
+
+        for (var i = 0; i < taskNames.length; i++){
+            totalTaskTime = totalTaskTime + parseInt(taskLengths[i]);
+        }
+
+        var clockInterval = setInterval(function(){
+              counter ++;
+              dummyTaskTime++;
+              currTaskTime--;
+
+              d3.json("test_data.json", function(error, root) {
+
+                clockData = "{ 'name': '" + clockName + "', 'children': [";
+
+                for (var i = 0; i < taskNames.length; i++){
+                  if (i == taskNames.length - 1){
+                    clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + taskLengths[i] + "}]}";
+                  } else {
+                    clockData = clockData + "{'name': '" + taskNames[i] + "', 'order': " + i + ", 'size': " + (taskLengths[i] + dummyTaskTime) + "},";
+                  } 
+                }
+                
+                var root = eval("(" + clockData + ")");
+
+                partition
+                    .value(function(d) { return d.size; })
+                    .nodes(root)
+                    .forEach(function(d) {
+                      d._children = d.children;
+                      d.sum = d.value;
+                      d.key = key(d);
+                      d.fill = fill(d);
+                    });
+
+                path = svg.selectAll("path")
+                    .data(partition.nodes(root).slice(1))
+                  .enter().append("path")
+                    .attr("d", arc)
+                    .attr("id", function(d) { return d.name; })
+                    .style("opacity", function(d) { if (d.name == "dummyTask") return 0; else return 1; })
+                    .style("fill", function(d) { return d.fill; })
+                    .each(function(d) { this._current = updateArc(d); })
+                    .on("click", zoomIn);
+              });
+              
+              if (root.children[0].size < totalTaskTime){
+                  root.children[0].size++;
+
+                  for (var i = 1; i < taskNames.length; i++){
+                    if (root.children[i].size > 0){
+                      root.children[i].size--;
+                      $("#cCurrentTask").html(root.children[i].name);
+                      break;
+                    }
+                  }
+              } else {
+                  window.clearInterval(clockInterval);
+                  alert("Done!");
+              }
+              
+              zoom(root, "asd");
+
+          }, 100);
       });
 
       function key(d) {
@@ -272,6 +349,7 @@
       }
 
       d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
+
     }
 
     </script>
