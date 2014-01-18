@@ -179,7 +179,7 @@ $(document).ready(function() {
     });
 
 
-    $(document.body).on("hover", "#flowClockContainer path", function(){
+    $(document.body).on("mouseover", "#flowClockContainer path", function(){
         console.log($(this).attr("id"));
     });
 });
