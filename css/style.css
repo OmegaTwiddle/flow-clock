@@ -1,0 +1,88 @@
+/*----------GENERAL----------*/
+
+body {
+	background-color: rgb(240, 255, 255);
+}
+
+p {
+    color: #444;
+}
+
+/*----------TOPBAR----------*/
+
+.top-bar, .top-bar .right, .top-bar a, .top-bar-section li a:not(.button), .top-bar-section li a:not(.button):hover {
+    background-color: rgb(50,198,166);
+}
+
+.top-bar-section ul li > a {
+    color: rgba(255,255,255,0.85);
+}
+.top-bar-section ul li > a:hover {
+    color: rgba(255,255,255,1);
+}
+
+.top-bar .name {
+    opacity: 0.95;
+}
+.top-bar .name:hover {
+    opacity: 1;
+}
+
+#flowclocklogo {
+    height: 30px;
+}
+
+/*----------INDEX----------*/
+
+#flowClockContainer {
+	width: 100%;
+    text-align: center;
+    margin: 50px 0 25px;
+}
+
+
+/*----------D3----------*/
+
+circle, path {
+    cursor: pointer;
+}
+
+circle {
+    fill: none;
+    pointer-events: all;
+}
+
+/*----------UNSORTED----------*/
+
+
+footer {
+   margin-top: 50px;
+   background-color: rgb(50,198,166);
+   height: 50px;
+}
+
+#clockInfo {
+    margin: 25px auto;
+    padding: 25px;
+    list-style: none;
+    background-color: rgba(0,20,20,0.05);
+    max-width: 500px;
+}
+#clockInfo h2 {
+    font-weight: 400;
+}
+#clockInfo h2, #clockInfo h3, #clockInfo h4 {
+    color: #777;
+}
+
+footer {
+
+}
+
+#cCountDown {
+/*
+    background-color: rgba(255,255,255,0.85);
+    padding: 5px 10px;
+    letter-spacing: 2px;
+*/
+}

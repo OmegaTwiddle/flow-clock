@@ -7,25 +7,14 @@
 
     <!-- Loading Foundation CSS and JS -->
     <link rel="stylesheet" href="components/foundation/css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="components/foundation/js/modernizr.js"></script>
 
     <!-- Loading D3 Dependencies -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
-    <style>
-      circle,
-      path {
-        cursor: pointer;
-      }
-
-      circle {
-        fill: none;
-        pointer-events: all;
-      }
-    </style>
-
   </head>
-  <body style="background-color:rgba(0, 110, 174, 0.701961);">
+  <body>
 
   <!-- LOGIN AND REGISTER MODALS
   ============================== -->
@@ -74,7 +63,7 @@
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
-          <h1><a href="#">FlowClock</a></h1>
+          <h1><a href="#"><img id="flowclocklogo" src="img/flowclock_small.png"/> FlowClock</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
       </ul>
@@ -99,16 +88,22 @@
 
     
     <div class="row">
-      <div class="large-12 columns">
-        <br><br>
-        <div hidden id="clockInfo">
-          Clock name: <span id="cName"></span><br><br>
-          Current task: <span id="cCurrentTask"></span><br><br>
-          Hovered task: <span id="cTask"></span>
-        </div>
+      <div class="large-4 columns text-center">
+        <ul hidden id="clockInfo">
+          <li><h1><span id="cCountDown"></span></h1></li>
+          <li><h2><span id="cName"></span></h1></li>
+          <li><h3><span id="cCurrentTask"></span></h3></li>
+          <li><h3><span id="cTask"></span></h3></li>
+        </ul>
+      </div>
+      <div class="large-8 columns">
         <div id="flowClockContainer"></div>
       </div>
     </div>
+
+    <footer>
+
+    </footer>
     
     <script src="components/foundation/js/jquery.js"></script>
     <script src="components/foundation/js/foundation.min.js"></script>
@@ -117,11 +112,27 @@
     </script>
 
     <script>
+
+   	function padDigits(num) {
+        if(num > 9 || num < 0 )
+            return num;
+        else
+            return "0" + num;
+    }
+
+    function formatSeconds(sec) {
+        if(sec < 60)
+            return "00:" + padDigits(sec);
+        else
+            return padDigits(parseInt(sec/60)) + ":" + padDigits(sec%60);
+    }
+
     var clockInterval;
 
     function createClock(clockName, taskNames, taskLengths){
 
-      var margin = {top: 350, right: 480, bottom: 350, left: 480},
+//      var margin = {top: 350, right: 480, bottom: 350, left: 480},
+      var margin = {top: 300, right: 300, bottom: 300, left: 300},
           radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
 
       var hue = d3.scale.category10();
@@ -336,7 +347,8 @@
                   for (var i = 1; i < taskNames.length; i++){
                     if (root.children[i].size > 0){
                       root.children[i].size--;
-                      $("#cCurrentTask").html(root.children[i].name + " -- " + root.children[i].size + " seconds left!");
+                      $("#cCountDown").html(formatSeconds(root.children[i].size));
+                      $("#cCurrentTask").html(root.children[i].name);
                       break;
                     }
                   }
